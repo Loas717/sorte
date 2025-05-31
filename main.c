@@ -6,12 +6,8 @@
 
 #define MAX 10
 
-//Processos:
-// Processo Servidor: Controla o tabuleiro, gerencia os movimentos, checa quem venceu.
-// Processo Jogador 1
-// Processo Jogador 2
 
-int printBoard();
+int printBoard(), jogar_dado();
 void jogador1(), jogador2();
 
 int pos_j1=0, pos_j2=0, tabuleiro[MAX];
@@ -40,16 +36,26 @@ int main(){
         jogador1();
     }
     
-    
     //printf("main.c");
 }
 
-void jogador1(){
+int jogar_dado() {
+    srand(time(NULL) + getpid());  
+    int resultado = (rand() % 6) + 1;
+    printf("Dado jogado! Valor obtido: %d\n", resultado);
+    return resultado;
+}
 
+void jogador1(){
+    int dado = jogar_dado();
+    pos_j1 += dado;
+    printf("Jogador 1 está na posição %d\n", pos_j1);
 }
 
 void jogador2(){
-
+    int dado = jogar_dado();
+    pos_j2 += dado;
+    printf("Jogador 2 está na posição %d\n", pos_j2);
 }
 
 int printBoard(){

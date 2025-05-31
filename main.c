@@ -14,7 +14,7 @@ int pos_j1=0, pos_j2=0, tabuleiro[MAX];
 
 int main(){
     int pipe_j1[2], pipe_j2[2], pipe_j1_s[2], pipe_j2_s[2], descritorj1, descritorj2;
-    if (pipe(pipe_j1_s) < 0 || pipe(pipe_j1_s) < 0 || pipe(pipe_j2_s) < 0 || pipe(pipe_j2_s) < 0) {
+    if (pipe(pipe_j1) < 0 || pipe(pipe_j1_s) < 0 || pipe(pipe_j2) < 0 || pipe(pipe_j2_s) < 0) {
         printf("Erro na chamada PIPE");
         exit(1);
     }

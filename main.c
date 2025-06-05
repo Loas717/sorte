@@ -6,7 +6,6 @@
 
 #define MAX 10
 
-//para fazer: o jogo fica melhor se for manual msm, o srand produz numeros similares
 
 int printBoard(), jogar_dado();
 void jogador1(int readfd, int writefd), jogador2(int readfd, int writefd), capturaTeclado(int id);
@@ -151,17 +150,17 @@ void jogador2(int readfd, int writefd){
 }
 
 void capturaTeclado(int id){
-    char input[10];
+    char input;
     if(id==0){
+        printf("Jogador 1, digite 'Y' para jogar o dado: ");
         do {
-            printf("Jogador 1, digite 'Y' para jogar o dado: ");
-            fgets(input, sizeof(input), stdin);
-        } while (input[0] != 'Y' && input[0] != 'y');
+            scanf("%c",&input);
+        } while (input != 'Y' && input != 'y');
     }else{
+        printf("Jogador 2, digite 'Y' para jogar o dado: ");
         do {
-            printf("Jogador 2, digite 'Y' para jogar o dado: ");
-            fgets(input, sizeof(input), stdin);
-        } while (input[0] != 'Y' && input[0] != 'y');
+            scanf("%c",&input);
+        } while (input != 'Y' && input != 'y');
     }
 }
 

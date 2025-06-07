@@ -74,6 +74,9 @@ int main(){
             write(pipe_j1_s[1],&j_1,sizeof(int));
             read(pipe_j1[0], &dado,sizeof(int));
             pos_j1+=dado;
+            if(pos_j1>MAX){
+                pos_j1=MAX;
+            }
             printf("Jogador 1 tirou %d e foi para posição %d\n", dado, pos_j1);
             if(pos_j1>=MAX){
                 printf("Jogador 1 venceu!\n");
@@ -84,6 +87,9 @@ int main(){
             write(pipe_j2_s[1],&j_2,sizeof(int));
             read(pipe_j2[0], &dado,sizeof(int));
             pos_j2+=dado;
+            if(pos_j2>MAX){
+                pos_j2=MAX;
+            }
             printf("Jogador 2 tirou %d e foi para posição %d\n", dado, pos_j2);
             if(pos_j2>=MAX){
                 printf("Jogador 2 venceu!\n");
@@ -94,6 +100,9 @@ int main(){
             write(pipe_j2_s[1],&j_2,sizeof(int));
             read(pipe_j2[0], &dado,sizeof(int));
             pos_j2+=dado;
+            if(pos_j2>MAX){
+                pos_j2=MAX;
+            }            
             printf("Jogador 2 tirou %d e foi para posição %d\n", dado, pos_j2);
             if(pos_j2>=MAX){
                 printf("Jogador 2 venceu!\n");
@@ -104,6 +113,9 @@ int main(){
             write(pipe_j1_s[1],&j_1,sizeof(int));
             read(pipe_j1[0], &dado,sizeof(int));
             pos_j1+=dado;
+            if(pos_j1>MAX){
+                pos_j1=MAX;
+            }
             printf("Jogador 1 tirou %d e foi para posição %d\n", dado, pos_j1);
             if(pos_j1>=MAX){
                 printf("Jogador 1 venceu!\n");

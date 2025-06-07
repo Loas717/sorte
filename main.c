@@ -3,19 +3,28 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
+#include <pthread.h>
 
 #define MAX 10
 
-
-int printBoard(), jogar_dado();
+int jogar_dado();
 void jogador1(int readfd, int writefd), jogador2(int readfd, int writefd), capturaTeclado(int id);
+void* contador_tempo(void* arg);
 
 int pos_j1=0, pos_j2=0, tabuleiro[MAX];
+int segundos = 0;
+int minutos = 0;
+int tempo_rodando = 1;
 
 int main(){
     srand(time(NULL) + getpid());
     int pipe_j1[2], pipe_j2[2], pipe_j1_s[2], pipe_j2_s[2], descritorj1, descritorj2;
     int quem_comeca = rand() % 2; // 0 = jogador1, 1 = jogador2
+    pthread_t thread_tempo;
+    if (pthread_create(&thread_tempo, NULL, contador_tempo, NULL) != 0) {
+        printf("Erro na chamada thread");
+        exit(1);
+    }
     if (pipe(pipe_j1) < 0 || pipe(pipe_j1_s) < 0 || pipe(pipe_j2) < 0 || pipe(pipe_j2_s) < 0) {
         printf("Erro na chamada PIPE");
         exit(1);
@@ -109,6 +118,9 @@ int main(){
     close(pipe_j2[0]);
     close(pipe_j2_s[1]);
     //printf("main.c");
+    tempo_rodando = 0;
+    pthread_join(thread_tempo, NULL);
+    printf("\nTempo total de execução: %d minutos e %d segundos\n", segundos / 60, segundos % 60);
 }
 
 int jogar_dado() {
@@ -164,6 +176,10 @@ void capturaTeclado(int id){
     }
 }
 
-int printBoard(){
-
+void* contador_tempo(void* arg) {
+    while (tempo_rodando) {
+        sleep(1);
+        segundos++;
+    }
+    pthread_exit(NULL);
 }
